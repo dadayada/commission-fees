@@ -1,5 +1,9 @@
 import { isSameISOWeek } from 'date-fns';
 
+/**
+ * The returned function calculates the commission fee based on the provided configuration and the
+ * operation details, considering previous calls if weekly free limit is specified.
+ */
 export function getCommissionFeeCalculator(config) {
   let weeklyTotals = {};
   let lastOperationDate = new Date('0000-01-01');
@@ -36,9 +40,7 @@ export function getCommissionFeeCalculator(config) {
 }
 
 export function calculateCommissions(operations, config, calculatorCreator) {
-  const cashInCommissionFeeCalculator = calculatorCreator(
-    config.cashInConfig
-  );
+  const cashInCommissionFeeCalculator = calculatorCreator(config.cashInConfig);
   const cashOutNaturalCommissionCalculator = calculatorCreator(
     config.cashOutNaturalConfig
   );
